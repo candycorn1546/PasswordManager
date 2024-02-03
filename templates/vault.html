@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Manager - Vault</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Add your custom styles for the popup here */
+        .popup {
+            display: none; /* Hide the popup by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .popup-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 0px;
+            border: 1px solid #888; /* Add border */
+            width: 90%;
+            max-width: 900px;
+            height: 70%;
+            max-height: 80vh;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+        }
+
+        /* Close button styles */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .popup-header {
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            padding: 20px 0;
+            margin-top: 0;
+            border-top-left-radius: 0px;
+            border-top-right-radius: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="sidebar">
+            <a href="{{ url_for('vault') }}" class="vault">
+                <img src="{{ url_for('static', filename='dashboard.png') }}" alt="Dashboard Icon">
+                Dashboard
+            </a>
+            <a href="#">
+                <img src="{{ url_for('static', filename='favorite.png') }}" alt="Favorite Icon">
+                Favorite
+            </a>
+            <a href="{{ url_for('password') }}">
+                <img src="{{ url_for('static', filename='password.png') }}" alt="Password Icon">
+                Password
+            </a>
+            <a href="{{ url_for('note') }}">
+                <img src="{{ url_for('static', filename='notes.png') }}" alt="Note Icon">
+                Note
+            </a>
+            <a href="#">
+                <img src="{{ url_for('static', filename='card.png') }}" alt="Card Icon">
+                Card
+            </a>
+            <a href="#">
+                <img src="{{ url_for('static', filename='person.png') }}" alt="Person Icon">
+                Identity
+            </a>
+            <a href="#">
+                <img src="{{ url_for('static', filename='security.png') }}" alt="Person Icon">
+                Security
+            </a>
+            <a href="#">
+                <img src="{{ url_for('static', filename='setting.png') }}" alt="Person Icon">
+                Setting
+            </a>
+            <a href="{{ url_for('logout') }}">
+                <img src="{{ url_for('static', filename='logout.png') }}" alt="Person Icon">
+                Logout
+            </a>
+        </div>
+        <div class="brand">
+            <img src="{{ url_for('static', filename='padlock.png') }}" alt="SecureVault Logo">
+            <h2>SecureVault Manager</h2>
+        </div>
+        <div class="user-info" id="user-info">
+            <img src="{{ url_for('static', filename='profile.png') }}" alt="Profile Icon">
+            <div>
+                <p>{{ current_user.email }}</p>
+                <div class="dropdown" id="dropdown">
+                    <a href="#" class="dropdown-item">Profile</a>
+                    <a href="#" class="dropdown-item">Settings</a>
+                    <a href="{{ url_for('logout') }}" class="dropdown-item">Logout</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-container">
+            <input type="text" placeholder="Search...">
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>Welcome to Your Vault</h1>
+        <p>This is your secure vault. Manage your passwords here.</p>
+
+        <!-- Updated link to redirect to a specific URL -->
+        <a href="/add-credentials" class="add-credentials-link">Add New Credentials</a>
+
+        <!-- Add Credential Popup -->
+        <div id="add-credential-popup" class="popup">
+            <div class="popup-content">
+                <div class="popup-header">
+                    <h2>Add Password</h2>
+                </div>
+
+                <span class="close" onclick="closePopup()">&times;</span>
+                <form id="add-credential-form">
+                    <input type="text" name="url" placeholder="URL">
+                    <input type="text" name="website" placeholder="Name">
+                    <input type="text" name="username" placeholder="Username">
+                    <input type="password" name="password" placeholder="Password">
+                    <input type="text" name="folder" placeholder="Folder">
+                    <button type="submit">Add Credentials</button>
+                </form>
+            </div>
+        </div>
+
+        <ul>
+            {% for credential in user_credentials %}
+                <li>{{ credential.website }} - {{ credential.username }} - {{ credential.password }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+        var addCredentialsLink = document.querySelector('.add-credentials-link');
+        if (addCredentialsLink) {
+            addCredentialsLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                window.location.href = "/add-credentials";
+        });
+    }
+});
+
+
+    </script>
+</body>
+</html>

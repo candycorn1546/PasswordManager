@@ -1,0 +1,270 @@
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+h1 {
+    color: #333;
+}
+
+p {
+    color: #666;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #007bb5;
+}
+
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+/* Styling for the popup and error message */
+.error-message {
+    color: #f44336;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.popup {
+    display: none;
+    position: absolute;
+    margin-top: 5px;
+    padding: 10px;
+    background-color: #f44336;
+    color: #fff;
+    border-radius: 8px;
+    z-index: 1000;
+}
+.user-info {
+    position: absolute;
+    top: 0;
+    right: 60px;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+.user-info img {
+    width: 20px; /* Adjust size as needed */
+    height: 20px; /* Adjust size as needed */
+    margin-right: 5px; /* Adjust spacing between icon and text */
+}
+.sidebar {
+    height: 100%;
+    width: 250px; /* Set initial width of sidebar */
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    color: white;
+    z-index: 2;
+    transition: width 0.3s ease-in-out; /* Use width transition */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push the button to the bottom */
+}
+.sidebar a {
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    margin-bottom: 10px;
+    align-items: center;
+    transition: width 0.3s ease-in-out;
+    overflow-x: hidden;
+}
+
+.sidebar a:hover {
+    background-color: #444;
+}
+.sidebar a:first-child {
+    margin-top: 30px; /* Adjust as needed */
+}
+
+/* Main content */
+.content {
+    margin-left: 250px; /* Adjust this value to match the width of your sidebar */
+    padding: 20px;
+    z-index: 1; /* Ensure the content is above the header */
+    margin-top: 100px; /* Added margin to accommodate longer top bar */
+}
+
+/* Header */
+.header {
+    background-color: #333; /* Adjust the background color as needed */
+    padding: 10px;
+    color: white;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3; /* Ensure the header is above other content */
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Center items vertically */
+    height: 60px; /* Increased height of the top bar */
+}
+
+.header .brand {
+    display: flex;
+    align-items: center;
+    margin-left: 260px; /* Adjusted margin for brand */
+}
+
+.header .brand img {
+    margin-right: 10px; /* Adjust the margin between the logo and text */
+    height: 30px; /* Adjust the height of the logo */
+}
+
+.search-container {
+    margin-right: 540px; /* Adjusted margin */
+    display: flex;
+    align-items: center;
+}
+
+.search-container input[type=text] {
+    padding: 10px;
+    margin: 0;
+    border: none;
+    font-size: 16px;
+    width: 400px; /* Adjusted width */
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #333;
+    display: none;
+    z-index: 4;
+    width: 160px;
+    padding: 10px 0; /* Adjust the padding as needed */
+    border-radius: 5px; /* Add rounded corners for a better look */
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-item:hover {
+    background-color: #444;
+}
+
+/* Logout button */
+.logout-button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    display: block;
+}
+
+.logout-button:hover {
+    background-color: #444;
+}
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+h1 {
+    color: #333;
+}
+
+p {
+    color: #666;
+}
+
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+.sidebar a img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+

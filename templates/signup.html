@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Manager - Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("signupPassword").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+            var passwordStrengthPopup = document.getElementById("passwordStrengthPopup");
+
+            if (password.length < 8) {
+                alert("Password must be at least 8 characters long.");
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+
+            return true;
+        }
+
+        // Function to display error message
+        function displayErrorMessage(message) {
+            var errorDiv = document.getElementById("error-message");
+            errorDiv.innerHTML = message;
+            errorDiv.style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <form action="{{ url_for('signup') }}" method="post" onsubmit="return validatePassword()">
+            <label for="signupEmail">Email:</label>
+            <input type="email" id="signupEmail" name="signupEmail" required />
+
+            <label for="signupPassword">Password:</label>
+            <input type="password" id="signupPassword" name="signupPassword" required />
+
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required />
+
+            <!-- Popup for password strength -->
+            <div id="passwordStrengthPopup" class="popup"></div>
+
+            <!-- Display error message -->
+            <div id="error-message" class="error-message">
+                {% if error %}
+                    {{ error }}
+                {% endif %}
+            </div>
+
+            <!-- Display success/error message -->
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="{{ url_for('signin') }}">Sign In</a></p>
+    </div>
+</body>
+</html>
