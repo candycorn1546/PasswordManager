@@ -46,6 +46,10 @@
   - Passwords are hashed using bcrypt before being stored in the database, ensuring secure storage and authentication.
 
 
+## Pictures of the Application
+<img width="1498" alt="Screenshot 2024-02-25 at 12 04 44 AM" src="https://github.com/candycorn1546/PasswordManager/assets/157404986/fdfa3784-b28b-4654-a3f3-1c782a44f31f">
+<br><br>
+
 
 
 
