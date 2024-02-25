@@ -49,6 +49,9 @@
 ## Pictures of the Application
 <img width="1498" alt="Screenshot 2024-02-25 at 12 04 44 AM" src="https://github.com/candycorn1546/PasswordManager/assets/157404986/fdfa3784-b28b-4654-a3f3-1c782a44f31f">
 <br><br>
+<img width="1512" alt="Screenshot 2024-02-25 at 12 04 49 AM" src="https://github.com/candycorn1546/PasswordManager/assets/157404986/eb564632-ae1f-430f-a85b-fc66531ddf99">
+<br><br>
+<img width="1498" alt="Screenshot 2024-02-25 at 12 06 12 AM" src="https://github.com/candycorn1546/PasswordManager/assets/157404986/612f3e57-3605-4263-9c88-73936c197032">
 
 
 
