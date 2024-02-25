@@ -12,17 +12,17 @@ from sqlalchemy.orm import relationship
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'  # database named 'site.db'
 app.config['SECRET_KEY'] = 'your_secret_key'  # secret key for security
-db = SQLAlchemy(app)
-bcrypt = Bcrypt(app)
-login_manager = LoginManager(app)
-migrate = Migrate(app, db)
+db = SQLAlchemy(app) # database
+bcrypt = Bcrypt(app) # bcrypt for password hashing
+login_manager = LoginManager(app) # login manager
+migrate = Migrate(app, db) # migration
 
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(60), nullable=False)
-    cipher_suite_key = db.Column(db.String(255), nullable=False)
+    id = db.Column(db.Integer, primary_key=True) # unique identifier for each user
+    email = db.Column(db.String(120), unique=True, nullable=False) # email
+    password = db.Column(db.String(60), nullable=False) # password
+    cipher_suite_key = db.Column(db.String(255), nullable=False) # Fernet key for the user
     cipher_suite = relationship("CipherSuite", uselist=False, back_populates="user")  # relationship
 
     def is_active(self):  # make sure user is active, allowing them to login
@@ -38,10 +38,10 @@ class User(db.Model):
         return str(self.id)
 
 
-class CipherSuite(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    key = db.Column(db.String(255), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+class CipherSuite(db.Model): # CipherSuite model
+    id = db.Column(db.Integer, primary_key=True) # unique identifier for each cipher suite
+    key = db.Column(db.String(255), nullable=False) # Fernet key
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) # user who owns this cipher suite
     user = relationship("User", back_populates="cipher_suite")  # relationship
 
 
@@ -51,8 +51,8 @@ class UserCredential(db.Model):
     username = db.Column(db.String(255), nullable=False)  # username
     password = db.Column(db.String(255), nullable=False)  # pass
     url = db.Column(db.String(255))  # url
-    folder = db.Column(db.String(255))
-    notes = db.Column(db.Text)
+    folder = db.Column(db.String(255)) # folder
+    notes = db.Column(db.Text) # notes
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # user who owns this credential
 
     def __repr__(self):  # use in case of needing to tracking obj
@@ -69,10 +69,10 @@ def add_credentials():
         username = request.form['username']
         password = request.form['password']
         notes = request.form['notes']
-        user_key = User.query.filter_by(id=current_user.id).first().cipher_suite_key
-        cipher_suite = Fernet(user_key)
-        encrypted_password = cipher_suite.encrypt(password.encode()).decode('utf-8')
-        new_credential = UserCredential(
+        user_key = User.query.filter_by(id=current_user.id).first().cipher_suite_key # get user key
+        cipher_suite = Fernet(user_key) # create a Fernet cipher suite
+        encrypted_password = cipher_suite.encrypt(password.encode()).decode('utf-8') # encrypt the password
+        new_credential = UserCredential( # create a new credential
             website=website,
             folder=folder,
             url=url,
@@ -99,7 +99,7 @@ def load_user(user_id):
     return db.session.get(User, int(user_id))
 
 
-@app.route('/get_credential/<int:credential_id>', methods=['GET'])
+@app.route('/get_credential/<int:credential_id>', methods=['GET']) # get credential by id
 @login_required  # make sure logged in
 def get_credential(credential_id):
     credential = UserCredential.query.filter_by(id=credential_id,
@@ -118,13 +118,9 @@ def get_credential(credential_id):
 @app.route('/update_credential/<int:credential_id>', methods=['POST'])
 @login_required
 def update_credential(credential_id):
-    credential = UserCredential.query.filter_by(id=credential_id, user_id=current_user.id).first()
-    print()
+    credential = UserCredential.query.filter_by(id=credential_id, user_id=current_user.id).first() # find the credential
     if credential:
         data = request.json  # get data from request
-
-        print("Received data:", data)  # debug
-
         try:
             credential.website = data.get('website', credential.website)
             credential.url = data.get('url', credential.url)
@@ -137,9 +133,6 @@ def update_credential(credential_id):
                 cipher_suite = Fernet(user_key)
                 encrypted_password = cipher_suite.encrypt(data['password'].encode()).decode('utf-8')
                 credential.password = encrypted_password
-
-            print("Updated credential:", credential)  # Debugging: Print updated credential
-            print("Updated password:", data.get('password'))
 
             db.session.commit()  # Commit changes to the database
             return jsonify({'message': 'Credential updated successfully'})
@@ -156,7 +149,7 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup', methods=['GET', 'POST']) # sign up
 def signup():
     if request.method == 'POST':
         email = request.form['signupEmail']
@@ -193,17 +186,17 @@ def signup():
     return render_template('signup.html')
 
 
-@app.route('/signin', methods=['GET', 'POST'])
+@app.route('/signin', methods=['GET', 'POST']) # sign in
 def signin():
     if request.method == 'POST':
-        email = request.form['signinEmail']
-        password = request.form['signinPassword']
+        email = request.form['signinEmail'] # get email
+        password = request.form['signinPassword'] # get password
 
         user = User.query.filter_by(email=email).first()
 
         if user and check_password_hash(user.password, password):  # check if the user and password correct
             login_user(user)
-            return redirect(url_for('vault'))
+            return redirect(url_for('vault')) # redirect to vault
 
         return render_template('signin.html', error='Username or password is incorrect. Please try again.')
 
@@ -220,7 +213,6 @@ logging.basicConfig(level=logging.DEBUG)  # Set logging level to DEBUG
 @app.route('/decrypt_password', methods=['POST'])
 def decrypt_password():
     try:
-        print("raw:", request.json)
         encrypted_password = request.json.get('encrypted_password').encode().decode('utf-8')  # get encrypted pass
         user_key = User.query.filter_by(id=current_user.id).first().cipher_suite_key
         cipher_suite = Fernet(user_key)
