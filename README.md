@@ -1,6 +1,5 @@
-# SecureVault Password Manager
 
-## Overview
+#Overview
   A password manager application built with Flask, using SQL to securely manage user credentials. It provides functionalities for users to sign up, sign in, add, update, delete, and view their credentials securely. The application uses encryption and hashing techniques to ensure the security of user data.
 
 - ### Feature of the Password Manager
