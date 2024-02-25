@@ -268,3 +268,91 @@ img {
     margin-right: 10px;
 }
 
+.content {
+        padding: 0;
+    }
+
+    .credentials-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            margin-top: -400px; /* Adjust top margin */
+            margin-left: -700px; /* Adjust left margin */
+        }
+
+    .credential-box {
+        flex: 1 0 calc(40% - 20px);
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 15px;
+        box-sizing: border-box;
+        margin: 10px 20px 10px 0;
+        height: 120px;
+        cursor: pointer; /* Change cursor to pointer for clickable effect */
+        position: relative; /* Ensure correct positioning of the popup */
+    }
+
+    .website {
+        font-weight: bold;
+    }
+
+    .email {
+        margin-top: 5px;
+    }
+
+    .popup {
+        display: none;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fefefe;
+        padding: 20px;
+        border: 1px solid #888;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        z-index: 999; /* Ensure popup is on top of other content */
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+    }
+            .add-credentials-link {
+            position: absolute;
+            bottom: 20px; /* Adjust bottom position */
+            right: 20px;} /* Adjust right position */
+.password-container {
+    display: inline-block;
+    position: relative;
+}
+
+.show-password {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.password-container {
+    display: inline-block;
+    position: relative;
+    width: calc(110% - 50px); /* Adjust the width dynamically */
+}
+
+#popupPassword {
+    width: calc(100% - 30px); /* Adjust the width dynamically */
+}
+
+.show-password {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

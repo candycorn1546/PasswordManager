@@ -2,9 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticky Note</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-
+  <div class="header">
+    <div class="sidebar">
+      <a href="{{ url_for('vault') }}" class="vault">
+        <img src="{{ url_for('static', filename='dashboard.png') }}" alt="Dashboard Icon"> Dashboard </a>
+      <a href="#">
+        <img src="{{ url_for('static', filename='favorite.png') }}" alt="Favorite Icon"> Favorite </a>
+      <a href="{{ url_for('password') }}">
+        <img src="{{ url_for('static', filename='password.png') }}" alt="Password Icon"> Password </a>
+      <a href="{{ url_for('note') }}">
+        <img src="{{ url_for('static', filename='notes.png') }}" alt="Note Icon"> Note </a>
+      <a href="#">
+        <img src="{{ url_for('static', filename='card.png') }}" alt="Card Icon"> Card </a>
+      <a href="#">
+        <img src="{{ url_for('static', filename='person.png') }}" alt="Person Icon"> Identity </a>
+      <a href="#">
+        <img src="{{ url_for('static', filename='security.png') }}" alt="Person Icon"> Security </a>
+      <a href="#">
+        <img src="{{ url_for('static', filename='setting.png') }}" alt="Person Icon"> Setting </a>
+      <a href="{{ url_for('logout') }}">
+        <img src="{{ url_for('static', filename='logout.png') }}" alt="Person Icon"> Logout </a>
+    </div>
+    <div class="brand">
+      <img src="{{ url_for('static', filename='padlock.png') }}" alt="SecureVault Logo">
+      <h2>SecureVault Manager</h2>
+    </div>
+    <div class="user-info" id="user-info">
+      <img src="{{ url_for('static', filename='profile.png') }}" alt="Profile Icon">
+      <div>
+        <p>{{ current_user.email }}</p>
+        <div class="dropdown" id="dropdown">
+          <a href="#" class="dropdown-item">Profile</a>
+          <a href="#" class="dropdown-item">Settings</a>
+          <a href="{{ url_for('logout') }}" class="dropdown-item">Logout</a>
+        </div>
+      </div>
+    </div>
+    <div class="search-container">
+      <input type="text" placeholder="Search...">
+    </div>
+  </div>
+  <div class="content">
+    <h3>Sticky Note</h3>
+    <form action="{{ url_for('save_note') }}" method="POST">
+      <textarea name="note" id="note" cols="30" rows="10" placeholder="Write your note here..."></textarea>
+      <button type="submit">Save Note</button>
+    </form>
+  </div>
 </body>
 </html>
