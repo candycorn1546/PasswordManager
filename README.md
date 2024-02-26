@@ -49,9 +49,18 @@
 ## Pictures of the Application
 <img width="1498" alt="Screenshot 2024-02-25 at 12 04 44 AM" src="https://github.com/candycorn1546/PasswordManager/assets/157404986/fdfa3784-b28b-4654-a3f3-1c782a44f31f">
 <br><br>
-<img width="1512" alt="Screenshot 2024-02-25 at 12 04 49 AM" src="https://github.com/candycorn1546/PasswordManager/assets/157404986/eb564632-ae1f-430f-a85b-fc66531ddf99">
+<img width="1508" alt="Screenshot 2024-02-25 at 10 39 01 PM" src="https://github.com/candycorn1546/PasswordManager/assets/157404986/1944e15e-47ae-4f8c-ab27-7e32958a426e">
 <br><br>
 <img width="1498" alt="Screenshot 2024-02-25 at 12 06 12 AM" src="https://github.com/candycorn1546/PasswordManager/assets/157404986/612f3e57-3605-4263-9c88-73936c197032">
+<br><br>
+<img width="1488" alt="Screenshot 2024-02-25 at 10 39 15 PM" src="https://github.com/candycorn1546/PasswordManager/assets/157404986/f55a6301-f1ae-42fd-9a14-0033c9219a76">
+<br><br>
+<img width="1493" alt="Screenshot 2024-02-25 at 10 39 37 PM" src="https://github.com/candycorn1546/PasswordManager/assets/157404986/d989dde3-ba54-4a5a-a403-e25f77600ff0">
+<br><br>
+<img width="1083" alt="Screenshot 2024-02-25 at 10 41 44 PM" src="https://github.com/candycorn1546/PasswordManager/assets/157404986/a06f8395-edba-4e45-84ee-d5a6f70e4073">
+
+    An example of the user credential database, the password are encrypted and stored by the user credential unique ID
+
 
 
 
