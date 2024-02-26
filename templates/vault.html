@@ -185,7 +185,7 @@ function decryptPassword(encryptedPassword) { //decrypt password
         body: JSON.stringify({ 'encrypted_password': encryptedPassword }) //send encrypted password
     })
     .then(response => {
-        if (response.ok) {
+        if (response.ok) { //if successful
             return response.json();
         } else {
             throw new Error('Failed to decrypt password');
