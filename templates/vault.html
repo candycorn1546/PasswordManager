@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Manager - Vault</title>
+    <title>Password Manager - Vault</title> <!-- title of the page -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script> <!-- Include CryptoJS library here -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script> <!-- include CryptoJS library -->
 </head>
 <body>
-  <div class="header">
-    <div class="sidebar">
+  <div class="header"> <!-- header section -->
+    <div class="sidebar"> <!-- sidebar section -->
       <a href="{{ url_for('vault') }}" class="vault">
         <img src="{{ url_for('static', filename='dashboard.png') }}" alt="Dashboard Icon"> Dashboard </a>
       <a href="#">
@@ -45,14 +45,14 @@
         </div>
       </div>
     </div>
-    <div class="search-container">
-      <input type="text" placeholder="Search...">
+    <div class="search-container"> <!-- search bar -->
+      <input type="text" placeholder="Search..."> <!-- search input -->
     </div>
   </div>
-  <div class="content">
-    <a href="{{ url_for('add_credentials_page') }}" class="add-credentials-link">Add New Credentials</a>
+  <div class="content"> <!-- main content section -->
+    <a href="{{ url_for('add_credentials_page') }}" class="add-credentials-link">Add New Credentials</a> <!-- link to add new credentials -->
     <div class="credentials-container"> {% for credential in user_credentials %} <div class="credential-box" onclick="openPopup('{{ credential.website }}', '{{ credential.url }}','{{ credential.username }}', '{{ credential.password }}', '{{ credential.notes }}', '{{ credential.id }}')">
-        <div class="website">{{ credential.website }}</div>
+        <div class="website">{{ credential.website }}</div> <!-- display website -->
         <div class="email">{{ credential.username }}</div>
       </div> {% endfor %} </div>
     <div id="credentialPopup" class="popup">
@@ -77,7 +77,7 @@
 </body>
 </html>
 
-<script>
+<script> //javascript code
     var currentCredentialId; // store current id
 function openPopup(website, url, username, encryptedPassword, notes, id)
 { //open popup window
@@ -89,27 +89,27 @@ function openPopup(website, url, username, encryptedPassword, notes, id)
     decryptPassword(encryptedPassword) //decrypt passowrd and show the decrypt pass
     .then(decryptedPassword => {
         if (decryptedPassword !== null) {
-            document.getElementById('popupPassword').value = decryptedPassword;
+            document.getElementById('popupPassword').value = decryptedPassword; //show decrypted password
         } else {
-            console.error('Failed to decrypt password');
+            console.error('Failed to decrypt password'); //log error
         }
     });
 
-    document.getElementById('popupNotes').value = notes;
-    document.getElementById('credentialPopup').style.display = 'block';
+    document.getElementById('popupNotes').value = notes; //show notes
+    document.getElementById('credentialPopup').style.display = 'block'; //show popup
 }
 
-    function closePopup() {
+    function closePopup() { //close popup
         document.getElementById('credentialPopup').style.display = 'none';
     }
 
     function togglePasswordVisibility() //hide password by default
     {
-        var passwordInput = document.getElementById('popupPassword');
-        var showPasswordButton = document.querySelector('.show-password');
+        var passwordInput = document.getElementById('popupPassword'); //get password input
+        var showPasswordButton = document.querySelector('.show-password'); //get show password button
 
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
+        if (passwordInput.type === 'password') { //if password is hidden
+            passwordInput.type = 'text'; //show password
             showPasswordButton.textContent = 'Hide';
         } else {
             passwordInput.type = 'password';
@@ -119,7 +119,7 @@ function openPopup(website, url, username, encryptedPassword, notes, id)
 
 
 
-    function updateCredential()
+    function updateCredential() //update credential
     {
       //collect data
         var website = document.getElementById('popupWebsite').value;
@@ -154,9 +154,9 @@ function openPopup(website, url, username, encryptedPassword, notes, id)
         });
     }
 
-    function deleteCredential(credentialId) {
+    function deleteCredential(credentialId) { //delete credential
         if (confirm("Are you sure you want to delete this credential?")) {
-            fetch('/delete_credential/' + credentialId,
+            fetch('/delete_credential/' + credentialId, //send request to delete
                     {
                 method: 'DELETE',
                 headers: {
@@ -165,8 +165,8 @@ function openPopup(website, url, username, encryptedPassword, notes, id)
             })
             .then(response => {
                 if (response.ok) {
-                    console.log('Credential deleted successfully');
-                    location.reload();
+                    console.log('Credential deleted successfully'); //if successful
+                    location.reload(); //refresh to reflect changes
                 } else {
                     console.error('Error deleting credential');
                 }
@@ -176,13 +176,13 @@ function openPopup(website, url, username, encryptedPassword, notes, id)
             });
         }
     }
-function decryptPassword(encryptedPassword) {
-    return fetch('/decrypt_password', {
+function decryptPassword(encryptedPassword) { //decrypt password
+    return fetch('/decrypt_password', { //send request to decrypt
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ 'encrypted_password': encryptedPassword })
+        body: JSON.stringify({ 'encrypted_password': encryptedPassword }) //send encrypted password
     })
     .then(response => {
         if (response.ok) {
@@ -193,8 +193,8 @@ function decryptPassword(encryptedPassword) {
     })
     .then(data => {
         if ('decrypted_password' in data) {
-            console.log('Decrypted password:', data.decrypted_password);
-            return data.decrypted_password;
+            console.log('Decrypted password:', data.decrypted_password); //log
+            return data.decrypted_password; //return decrypted password
         } else {
             throw new Error('Decrypted password not found in response');
         }

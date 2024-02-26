@@ -7,17 +7,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
     <script>
-        function validatePassword() {
-            var password = document.getElementById("signupPassword").value;
-            var confirmPassword = document.getElementById("confirmPassword").value;
+        function validatePassword() // Function to validate password
+        {
+            var password = document.getElementById("signupPassword").value; // Get the password
+            var confirmPassword = document.getElementById("confirmPassword").value; // Get the confirm password
             var passwordStrengthPopup = document.getElementById("passwordStrengthPopup");
 
-            if (password.length < 8) {
+            if (password.length < 8)  // If password length is less than 8
+            {
                 alert("Password must be at least 8 characters long.");
                 return false;
             }
 
-            if (password !== confirmPassword) {
+            if (password !== confirmPassword) // If password and confirm password do not match
+            {
                 alert("Passwords do not match.");
                 return false;
             }
